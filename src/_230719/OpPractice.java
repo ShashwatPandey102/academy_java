@@ -2,6 +2,19 @@ package _230719;
 
 public class OpPractice {
 	public static void main(String[] args) {
+
+		int age = 5;
+		int height = 130;
+		boolean parent = true;
+		boolean hearchDease = false;
+		
+		if((age >= 6 || (age < 6 && height >= 120 && parent)) && height >= 120 && !hearchDease) {
+			System.out.println("탑승 가능");
+		}else {
+			System.out.println("탑승 불가능");
+		}
+		
+		System.out.println("=======================");
 		
 		int year = 1900;
 		
@@ -40,22 +53,12 @@ public class OpPractice {
 		
 		int number = 1234;
 		
-		int result = (int)(number / 100) * 100;
+		int result = number / 100 * 100;
 		
 		System.out.println(result);
 		
 		System.out.println("=======================");
 		
-		int age = 5;
-		int height = 130;
-		boolean parent = true;
-		boolean hearchDease = false;
-		
-		if((age >= 6 || (age < 6 && height >= 120 && parent)) && height >= 120 && !hearchDease) {
-			System.out.println("탑승 가능");
-		}else {
-			System.out.println("탑승 불가능");
-		}
 	}
 }
 

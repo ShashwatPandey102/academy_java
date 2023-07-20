@@ -38,12 +38,15 @@ public class RPSGame {
 
 				int myInput = Integer.parseInt(br.readLine()); // 내가 낸 것
 				String my = getHangul(myInput); // 내가 낸 것 한글로
+				
+				if(my.isEmpty()) {
+					throw new NumberFormatException();
+				}
 
 				int comInput = (int) Math.floor(Math.random() * 3); // 컴퓨터
 				String com = getHangul(comInput); // 컴퓨터가 낸 것 한글로
 
 				sb.append("---------게임 결과----------\n");
-
 				sb.append(String.format("내가 낸 것 : %s, 컴퓨터가 낸 것 : %s\n", my, com));
 
 				int res = comInput - myInput; // 컴퓨터 - 나
@@ -71,7 +74,8 @@ public class RPSGame {
 				double winRate = 0;
 				
 				if(realCount > 0) {
-					winRate = win / (double)realCount * 100;
+//					winRate = win / (double)realCount * 100;
+					winRate = win / (double)(win + lose) * 100; // 이렇게도 됨
 				}else {
 					winRate = 0;
 				}
