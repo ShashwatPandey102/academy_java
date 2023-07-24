@@ -24,6 +24,8 @@ public class CarMain3 {
 			System.out.println(car.color);
 //			System.out.println(car.company);
 //			System.out.println(car.type);
+			
+			System.out.println(car.hashCode());
 		}
 		
 		// 이건 별도로 각 인덱스마다 new Car()를 했기 때문에, 각자 다른 객체를 가리키고 있다. 그러므로 다른 객체에 영향을 주지 않는다.

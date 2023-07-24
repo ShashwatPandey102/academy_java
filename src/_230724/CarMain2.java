@@ -15,6 +15,7 @@ public class CarMain2 {
 
 		for (int i = 0; i < cars.length; i++) {
 			cars[i] = tico; // 전부 같은 객체를 저장하였다.
+			System.out.println(cars[i].hashCode()); // 같은 주소를 가리킴
 		}
 
 		System.out.println("2번 인덱스 color : " + cars[2].color);
@@ -34,6 +35,7 @@ public class CarMain2 {
 		carList.add(tico);
 		
 		System.out.println(carList.toString());
+		
 	}
 }
 

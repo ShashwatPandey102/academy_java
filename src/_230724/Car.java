@@ -3,7 +3,7 @@ package _230724;
 public class Car {
 	// 필드 선언
 	String color; // 필드는 초기화에 대한 강제성이 없다.
-	String company;
+	static String company;
 	String type;
 	
 	// 메서드 선언
@@ -13,6 +13,7 @@ public class Car {
 	 * 
 	 */
 	public void go() {
+		long l = 20L; // 지역변수 (스태틱을 붙일 수 없음)
 		System.out.println("전진하다");
 	}
 	
