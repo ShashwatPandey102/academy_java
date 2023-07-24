@@ -8,7 +8,7 @@ public class P4_9 {
 		
 		for (int i = 0; i < str.length(); i++) {
 			int a = str.charAt(i);
-			sum += str.charAt(i) - 48;
+			sum += a - 48;
 		}
 		
 		System.out.println("sum = " + sum);

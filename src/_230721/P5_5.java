@@ -22,6 +22,9 @@ public class P5_5 {
 			ball3[i] = ballArr[i];
 		}
 		
+		// 또는 아래와 같은 방법으로 복사할 수도 있음
+		System.arraycopy(ballArr, 0, ball3, 0, ball3.length);
+		
 		for (int i = 0; i < ball3.length; i++) {
 			System.out.print(ball3[i]);
 		}

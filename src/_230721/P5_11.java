@@ -19,9 +19,9 @@ public class P5_11 {
 		for (int i = 0; i < score.length; i++) {
 			for (int j = 0; j < score[i].length; j++) {
 				result[i][j] = score[i][j];
-				result[i][score[0].length] += score[i][j];
+				result[i][score[i].length] += score[i][j];
 				result[score.length][j] += score[i][j];
-				result[score.length][score[0].length] += score[i][j]; 
+				result[score.length][score[i].length] += score[i][j];
 			}
 		}
 		
@@ -33,3 +33,9 @@ public class P5_11 {
 		}
 	}
 }
+
+
+
+
+
+

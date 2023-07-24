@@ -29,5 +29,15 @@ public class P4_10 {
 		}
 		
 		System.out.println("sum = " + sum);
+		
+//		이렇게 하는 게 더 편함
+//		int num = 12345;
+//		int sum = 0;
+//
+//		while(num > 0) {
+//			sum += num % 10; // num값에서 10을 나눠서 쓴다.
+//			num /= 10;
+//			System.out.println(sum);
+//		}
 	}
 }

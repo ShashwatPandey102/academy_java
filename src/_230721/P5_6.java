@@ -11,10 +11,18 @@ public class P5_6 {
 		int money = 2680;
 		System.out.println("money = " + money);
 		
+//		for (int i = 0; i < coinUnit.length; i++) {
+//			int div = money / coinUnit[i];
+//			System.out.printf("%d원: %d\n", coinUnit[i], div);
+//			money -= div * coinUnit[i];
+//		}
+		
+		// 더 간단하게 하는 방법
 		for (int i = 0; i < coinUnit.length; i++) {
 			int div = money / coinUnit[i];
 			System.out.printf("%d원: %d\n", coinUnit[i], div);
-			money -= div * coinUnit[i];
+//			money -= div * coinUnit[i];
+			money %= coinUnit[i];
 		}
 	}
 }

@@ -5,7 +5,7 @@ public class P4_11 {
 		
 		// 피보나치 수열의 10번째 수는 무엇인지 구하기
 		
-		int num1 = 1;
+		int num1 = 0;
 		int num2 = 1;
 		int num3 = 0;
 		
