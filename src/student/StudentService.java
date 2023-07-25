@@ -22,19 +22,21 @@ public class StudentService {
 		int kor = nextLineToInteger("국어 점수 입력하세요 > ");
 		int eng = nextLineToInteger("영어 점수 입력하세요 > ");
 		int math = nextLineToInteger("수학 점수 입력하세요 > ");
+		
+		int sum = kor + eng + math; // 총점
+		double avg = sum / 3.0; // 평균
 
-		this.students[cnt] = new Student(no, name, kor, eng, math);
+		this.students[cnt] = new Student(no, name, kor, eng, math, sum, avg);
 		cnt++;
 		this.list();
 	}
 
 	// 목록 조회
 	void list() {
-		System.out.println("학번	이름	국어	영어	수학");
-		System.out.println("====================================");
+		System.out.println("학번	이름	국어	영어	수학	총점	평균");
+		System.out.println("====================================================");
 		for (int i = 0; i < cnt; i++) { // 등록된 학생 수만큼 반복
-			System.out.printf("%4d\t%4s\t%4d\t%4d\t%4d\n", students[i].no, students[i].name, students[i].kor,
-					students[i].eng, students[i].math);
+			System.out.println(students[i]);
 		}
 	}
 }
