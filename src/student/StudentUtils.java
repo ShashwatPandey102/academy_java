@@ -19,7 +19,37 @@ public class StudentUtils {
 //		아래처럼 하면 메소드간 의존성은 없으나 너무 길어짐
 //		System.out.print(msg);
 //		return Integer.parseInt(sc.nextLine());
-
 		return Integer.parseInt(nextLine(msg + " "));
 	}
+
+//	public static void main(String[] args) {
+//		sc.nextLine(); // 이거는 Scanner의 nextLine()
+//		nextLine("abcd"); // 이거는 사용자정의 StudentUtils.nextLine()
+//		nextLine(); // 이건 당연히 안 됨 (이런 메소드가 없음)
+//		nextLine("asdfasdf"); // 이렇게 부르면 특별히 작성하지 않으면 자신의 클래스의 메서드를 가리킴
+//		StudentUtils.nextLine("asdfasdf"); 이거랑 같음
+//	}
+	
+	public static void main(String[] args) {
+		int i = 0;
+		String s = "1234"; // 비숫자형을 숫자로 파싱하려고 하면 NumberFormatException이 나온다
+		int j = Integer.parseInt(s);
+		System.out.println(j + 100);
+		
+		long k = Long.parseLong(s);
+		System.out.println(k);
+		
+		// int >> String
+		String s2 = i + ""; // 이거는 연산 과정에서 느림 (근데 이게 가독성은 좋음)
+		String s3 = String.valueOf(j); // 이게 속도는 더 빠름 (쓰기 귀찮고 가독성 긺)
+	}
+
 }
+
+
+
+
+
+
+
+

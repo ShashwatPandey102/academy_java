@@ -16,7 +16,7 @@ public class Student {
 //	}
 	
 	// 기본 생성자처럼 만들어 봄
-	Student(){
+	public Student(){ // 접근제한자를 적지 않으면 기본적으로 default(package)이며, 같은 패키지 안에서만 사용할 수 있다
 		
 	}
 	
