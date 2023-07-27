@@ -8,6 +8,7 @@ public class ComplexerMain {
 		System.out.println(Complexer.INK);
 		System.out.println(Complexer.FAX_NUMBER);
 
+		// 구현한 메서드들 호출
 		com.print();
 		com.scan();
 		com.send("02-8765-4321");
@@ -25,6 +26,7 @@ interface Printer {
 // 스캐너
 interface Scanner {
 	void scan(); // 추상 메서드 (스캔 기능)
+	void print(); // 이름이 겹쳐도 어차피 구현부가 없으므로 다중 구현이 가능한 것임.
 }
 
 // 팩스
@@ -40,6 +42,7 @@ interface Fax {
 class Complexer implements Printer, Scanner, Fax { // 인터페이스 다중 구현
 
 	// 인터페이스를 구현해야 하므로 각 추상 메서드를 구현한다
+	// 구현할 추상메서드 중 하나라도 구현하지 않으면 이 클래스도 추상 클래스가 되어야 한다.
 
 	@Override
 	public void send(String tel) {
@@ -62,3 +65,19 @@ class Complexer implements Printer, Scanner, Fax { // 인터페이스 다중 구
 	}
 
 }
+
+// 인터페이스가 인터페이스 상속
+interface Complexer2 extends Printer, Scanner, Fax {
+
+}
+
+// 인터페이스를 일부 구현하는 추상 클래스 (하나도 구현 안해도 됨)
+abstract class Complexer3 implements Printer, Scanner, Fax {
+
+}
+
+
+
+
+
+

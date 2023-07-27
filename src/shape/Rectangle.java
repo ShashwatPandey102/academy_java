@@ -1,16 +1,24 @@
 package shape;
 
-public class Rectangle extends Shape {
+public class Rectangle implements Shape2D{
 	// 너비, 높이
-	double x;
-	double y;
+	private double x;
+	private double y;
 	
 	public Rectangle(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	double area() {
+	// 넓이
+	@Override
+	public double area() {
 		return this.x * this.y;
+	}
+	
+	// 둘레
+	@Override
+	public double circum() {
+		return 2 * (this.x + this.y);
 	}
 }

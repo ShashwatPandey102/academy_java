@@ -1,6 +1,6 @@
 package shape;
 
-public class Circle extends Shape {
+public class Circle implements Shape2D{
 	// 반지름
 	double r;
 
@@ -10,7 +10,13 @@ public class Circle extends Shape {
 	}
 
 	// 넓이 구하는 메소드
-	double area() {
+	@Override
+	public double area() {
 		return Math.PI * Math.pow(r, 2);
+	}
+	
+	@Override
+	public double circum() {
+		return Math.PI * 2 * r;
 	}
 }
