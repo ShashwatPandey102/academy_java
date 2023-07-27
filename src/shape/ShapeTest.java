@@ -19,6 +19,7 @@ public class ShapeTest {
 		
 		Shape t1 = new Triangle(3, 5);
 		
+		// 자식 클래스들을 부모 클래스 배열에 모아놓을 수 있다.
 		Shape[] shapes = {c1, r1, t1}; // 분명 인스턴스 자료형은 다르나 (각각 Circle, Rectangle) 같은 공통 조상을 가지고 있기에 조상인 Shape 배열로 묶을 수 있다.
 		
 //		Shape s1 = new Shape(); // Cannot instantiate the type Shape 오류가 뜸 (명시적으로 추상 클래스로 선언했기 때문)

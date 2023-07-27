@@ -1,17 +1,18 @@
 package student;
 
-import static student.StudentUtils.nextLineToInteger;
+import static student.util.StudentUtils.nextLineToInteger;
 
-// 1. 학생 타입에 대한 기본정의 (클래스)
+import student.service.StudentService;
+
+// 1. 학생 타입에 대한 기본정의 (변수)
 // 2. 학생들 관리를 위한 학생 배열 생성
 // 2-1. 등록 기능 일부 구현
-// 3. 입력 관련 기능 유틸리티 작성
+// 3. 입력 관련 기능 유틸리티 정의
 // 4. 메인의 반복적인 프로그램 운용
 // 5. 등록 시 학생 배열의 정확한 위치 지정 (추가변수 사용 : 학생 수)
 
 public class StudentMain {
 	public static void main(String[] args) {
-
 //		Student s1 = new Student(10001234, "정민", 50, 70, 60);
 //		Student s2 = new Student(10001235, "홍길동", 70, 80, 68);
 //		
@@ -31,7 +32,7 @@ public class StudentMain {
 				ss.register();
 				break;
 			case 3:
-				System.out.println("수정");
+				ss.modify();
 				break;
 			case 4:
 				System.out.println("삭제");

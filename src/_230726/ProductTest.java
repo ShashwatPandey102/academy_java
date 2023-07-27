@@ -6,7 +6,15 @@ import java.util.List;
 // 약간 장바구니처럼 만드는 예제 (다형성 예제)
 // 메서드의 매개변수에 다형성을 이용한 예제
 
-class Buyer {
+abstract class Product { // 추상 클래스로 선언된 부모 클래스
+	int price;
+
+	Product(int price) { // 부모 클래스의 생성자
+		this.price = price;
+	}
+}
+
+class Buyer { // 구매자 클래스
 
 	int money = 1000; // 가지고 있는 돈
 	List<String> cart = new ArrayList<>(); // 장바구니
@@ -16,6 +24,7 @@ class Buyer {
 //		
 //	}
 
+	// 부모 클래스의 추상 클래스를 구현해야 함 (매개변수를 부모 클래스로 하였다)
 	void buy(Product p) { // 물건 (부모 클래스)을 구매 (다형성을 위해 여기서 부모 클래스를 매개변수로 적용함)
 		this.money -= p.price;
 		this.cart.add(p.getClass().getSimpleName()); // getClass().getSimpleName() : 해당 클래스 생성 시 생성되는 간단한 이름
@@ -54,14 +63,6 @@ class Laptop extends Product {
 	}
 }
 
-abstract class Product {
-	int price;
-
-	Product(int price) {
-		this.price = price;
-	}
-}
-
 public class ProductTest {
 	public static void main(String[] args) {
 
@@ -75,3 +76,8 @@ public class ProductTest {
 		buyer.print();
 	}
 }
+
+
+
+
+
