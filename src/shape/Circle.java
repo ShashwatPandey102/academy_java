@@ -2,7 +2,10 @@ package shape;
 
 public class Circle implements Shape2D{
 	// 반지름
-	double r;
+	private double r;
+	
+	public Circle() {
+	}
 
 	// 필드 초기화하는 생성자
 	public Circle(double r) {

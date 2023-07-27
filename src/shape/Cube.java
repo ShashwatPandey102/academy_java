@@ -2,9 +2,8 @@ package shape;
 
 public class Cube implements Shape3D{
 
-	// Cube를 구성하기 위해 사각형 객체와 z축 변수를 하나 사용할 것이다
-	private Rectangle rectangle;
-	private double z;
+	private Rectangle rectangle; // 사각형 객체
+	private double z; // z축
 	
 	// 기본 생성자
 	public Cube() {

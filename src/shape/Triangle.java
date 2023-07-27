@@ -4,8 +4,11 @@ public class Triangle implements Shape2D{ // 만약 추상 메서드가 하나�
 	// 방법이 두 가지가 있음.
 	// 1. 미구현된 추상 메서드를 구현하는 것.
 	// 2. 이 타입을 추상 클래스로 바꿀 것.
-	double x;
-	double y;
+	private double x;
+	private double y;
+	
+	public Triangle() {
+	}
 	
 	public Triangle(double x, double y) {
 		this.x = x;

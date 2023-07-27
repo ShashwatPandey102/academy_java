@@ -5,6 +5,9 @@ public class Rectangle implements Shape2D{
 	private double x;
 	private double y;
 	
+	public Rectangle() {
+	}
+	
 	public Rectangle(double x, double y) {
 		this.x = x;
 		this.y = y;
