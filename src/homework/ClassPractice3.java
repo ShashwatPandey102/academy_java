@@ -1,4 +1,4 @@
-package _230727;
+package homework;
 
 public class ClassPractice3 {
 	
