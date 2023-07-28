@@ -30,35 +30,12 @@ public class StudentService {
 			throw new RuntimeException("학번이 중복됩니다");
 		}
 
-		String name = nextLine("학생 이름을 입력하세요 > ");
-
-		int nameLen = name.length();
-		if (nameLen < 2 || nameLen > 4) {
-			throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
-		}
-
-		char[] nameChars = name.toCharArray();
-		for (char c : nameChars) {
-			int nameInt = (int) c;
-
-			if(nameInt < 44032 || nameInt > 55203) {
-				throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
-			}
-		}
-
-		int kor = nextLineToInteger("국어 점수 입력하세요 > ");
-		if(!isValidScore(kor)) {
-			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
-		}
-		int eng = nextLineToInteger("영어 점수 입력하세요 > ");
-		if(!isValidScore(eng)) {
-			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
-		}
-		int math = nextLineToInteger("수학 점수 입력하세요 > ");
-		if(!isValidScore(math)) {
-			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
-		}
-
+		// 입력받음
+		String name = inputName();
+		int kor = inputKor();
+		int eng = inputEng();
+		int math = inputMath();
+		
 		// 중간이 비기 때문에 이런 식으로 하면 안 됨
 		// 일단 현재 중간이 비는 부분을 찾아야 함
 		int minBlankIndex = findBlankIndex();
@@ -101,40 +78,11 @@ public class StudentService {
 			throw new RuntimeException("찾으려는 학생이 없습니다");
 		}
 
-		// 수정하려는 학생이 있으면
-
-		String name = nextLine("학생 이름을 입력하세요 > ");
-		int nameLen = name.length();
-		if (nameLen < 2 || nameLen > 4) {
-			throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
-		}
-
-		char[] nameChars = name.toCharArray();
-		for (char c : nameChars) {
-			int nameInt = (int) c;
-
-			if(nameInt < 44032 || nameInt > 55203) {
-				throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
-			}
-		}
-		
-		int kor = nextLineToInteger("국어 점수 입력하세요 > ");
-		if(!isValidScore(kor)) {
-			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
-		}
-		int eng = nextLineToInteger("영어 점수 입력하세요 > ");
-		if(!isValidScore(eng)) {
-			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
-		}
-		int math = nextLineToInteger("수학 점수 입력하세요 > ");
-		if(!isValidScore(math)) {
-			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
-		}
-
-		s.setName(name);
-		s.setKor(kor);
-		s.setEng(eng);
-		s.setMath(math);
+		// 입력받아서 수정함
+		s.setName(inputName());
+		s.setKor(inputKor());
+		s.setEng(inputEng());
+		s.setMath(inputMath());
 
 		System.out.println("해당 학생을 수정하였습니다");
 		System.out.println(s);
@@ -199,7 +147,7 @@ public class StudentService {
 		System.out.printf("학번\t이름\t국어\t영어\t수학\t총점\t평균\t석차\n");
 		for(Student s : rankingStudents) {
 			if(s != null) {
-				System.out.println(s.toString2(rank, studentCount));
+				System.out.println(s.toString(rank, studentCount));
 				rank++;
 			}
 		}
@@ -240,6 +188,7 @@ public class StudentService {
 		return -1;
 	}
 	
+	// 학생 배열 중 학생이 존재하는 개수 (총 학생 수 세기)
 	public int	countStudent() {
 		int cnt = 0;
 		
@@ -250,6 +199,53 @@ public class StudentService {
 		}
 		
 		return cnt;
+	}
+	
+	// 등록, 수정에 공통적으로 들어가는 부분
+	public String inputName() {
+		String name = nextLine("학생 이름을 입력하세요 > ");
+		int nameLen = name.length();
+		if (nameLen < 2 || nameLen > 4) {
+			throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
+		}
+
+		char[] nameChars = name.toCharArray();
+		for (char c : nameChars) {
+			int nameInt = (int) c;
+
+			if(nameInt < 44032 || nameInt > 55203) {
+				throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
+			}
+		}
+		
+		return name;
+	}
+	
+	public int inputKor() {
+		int kor = nextLineToInteger("국어 점수를 입력하세요 > ");
+		if(!isValidScore(kor)) {
+			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
+		}
+		
+		return kor;
+	}
+	
+	public int inputEng() {
+		int eng = nextLineToInteger("영어 점수를 입력하세요 > ");
+		if(!isValidScore(eng)) {
+			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
+		}
+		
+		return eng;
+	}
+	
+	public int inputMath() {
+		int math = nextLineToInteger("수학 점수를 입력하세요 > ");
+		if(!isValidScore(math)) {
+			throw new RuntimeException("0부터 100 사이의 정수로 입력해주세요");
+		}
+
+		return math;
 	}
 	
 }

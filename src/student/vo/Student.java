@@ -26,7 +26,7 @@ public class Student {
 				this.total(), this.avg());
 	}
 	
-	public String toString2(int rank, int count) {
+	public String toString(int rank, int count) {
 		return String.format("%3d\t%3s\t%3d\t%3d\t%3d\t%3d\t%3.2f\t%d/%d", this.no, this.name, this.kor, this.eng, this.math,
 				this.total(), this.avg(), rank, count);
 	}

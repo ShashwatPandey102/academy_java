@@ -29,7 +29,6 @@ public class StudentMain {
 		while (true) {
 
 			try {
-
 				int input = nextLineToInteger("1. 조회 / 2. 등록 / 3. 수정 / 4. 삭제 / 5. 석차조회 / 6. 종료");
 
 				switch (input) {
