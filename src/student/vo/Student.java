@@ -22,8 +22,13 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return String.format("%4d\t%4s\t%4d\t%4d\t%4d\t%4d\t%4.2f", this.no, this.name, this.kor, this.eng, this.math,
+		return String.format("%3d\t%3s\t%3d\t%3d\t%3d\t%3d\t%3.2f", this.no, this.name, this.kor, this.eng, this.math,
 				this.total(), this.avg());
+	}
+	
+	public String toString2(int rank, int count) {
+		return String.format("%3d\t%3s\t%3d\t%3d\t%3d\t%3d\t%3.2f\t%d/%d", this.no, this.name, this.kor, this.eng, this.math,
+				this.total(), this.avg(), rank, count);
 	}
 
 	// 총점 (총점을 별도로 저장장소에 저장하면 조회할 때마다 연산은 줄겠지만 공간도 차지하고 수정 시에도 계산해야 해서 일일이 연산하기로 함)

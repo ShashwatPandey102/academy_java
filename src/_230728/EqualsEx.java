@@ -1,6 +1,7 @@
 package _230728;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 public class EqualsEx {
 	public static void main(String[] args) {
@@ -37,6 +38,7 @@ class Obj {
 }
 
 @AllArgsConstructor
+@EqualsAndHashCode
 class ObjOverride {
 	private int objVar;
 
@@ -47,8 +49,23 @@ class ObjOverride {
 	// equals() 메서드 오버라이드
 	@Override
 	public boolean equals(Object obj) {
-		return (obj instanceof ObjOverride) ? true : false;
+		if(obj instanceof ObjOverride) { // 일단 해당 객체가 ObjOverride 자료형인지 비교
+			// 값을 비교해보자 (objVar로)
+			ObjOverride o = (ObjOverride) obj; // 매개변수가 Object 타입으로 넘어왔기 때문에 ObjOverride로 다운캐스팅 해야 한다.
+			return this.objVar == o.objVar;
+		}
+		return false;
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
