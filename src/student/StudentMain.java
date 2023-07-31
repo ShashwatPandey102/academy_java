@@ -42,7 +42,7 @@ public class StudentMain {
 					ss.modify();
 					break;
 				case 4:
-					ss.delete();
+					ss.remove();
 					break;
 				case 5:
 					ss.ranking();
@@ -53,11 +53,13 @@ public class StudentMain {
 				default:
 					throw new RuntimeException("1번부터 6번 사이에서 골라주세요");
 				}
-				
+
 			} catch (NumberFormatException e) {
 				System.out.println("정수형 숫자로 입력해주세요");
 
 			} catch (RuntimeException e) {
+				System.out.println(e.getMessage());
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
