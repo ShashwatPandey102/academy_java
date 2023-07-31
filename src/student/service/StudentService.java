@@ -3,8 +3,6 @@ package student.service;
 import static student.util.StudentUtils.nextLine;
 import static student.util.StudentUtils.nextLineToInteger;
 
-import java.util.Arrays;
-
 import student.exception.RangeException;
 import student.vo.Student;
 
@@ -121,7 +119,8 @@ public class StudentService {
 		// 버블 정렬 : 처음부터 끝까지 앞뒤로 비교하면서 작은 걸 뒤로 놓음. 그걸 n^2회 함)
 
 		// 주소가 다른 새로운 배열을 만들어서 거기에 복사 후 그걸로 정렬해야 함
-		Student[] rankingStudents = Arrays.copyOf(students, totalCnt); // 그대로 복사
+//		Student[] rankingStudents = Arrays.copyOf(students, totalCnt); // 그대로 복사
+		Student[] rankingStudents = students.clone(); // 이렇게 해도 됨
 		int rank = 1;
 
 		for (int i = 0; i < rankingStudents.length; i++) {
