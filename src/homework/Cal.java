@@ -39,6 +39,7 @@ public class Cal {
 		System.out.println(" SUN MON TUE WED THU FRI SAT");
 		
 		int j = 0; // 7 되면 0으로 감
+		int week = 0; // 고정시켜 보여주기 위한 주의 수
 		
 		for (int i = 0; i < this.calendar.get(Calendar.DAY_OF_WEEK) - 1; i++) {
 			System.out.printf("    ");
@@ -51,7 +52,12 @@ public class Cal {
 			if(j >= 7) {
 				System.out.println();
 				j = 0;
+				week++;
 			}
+		}
+		
+		if(week < 5) {
+			System.out.println();
 		}
 		
 		System.out.println("\n=============================");

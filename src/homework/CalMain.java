@@ -9,7 +9,7 @@ public class CalMain {
 		
 		cal.view();
 		
-		loop:while(true) {
+		loop: while(true) {
 			
 			try {
 				// 먼저 달력을 보여준 후에 입력을 받아야 함
@@ -31,14 +31,11 @@ public class CalMain {
 					default:
 						throw new RuntimeException("p, n, x 중 입력해주세요");
 				}
-
-				
 			} catch (RuntimeException e) {
 				System.out.println(e.getMessage());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
 	}
 	
