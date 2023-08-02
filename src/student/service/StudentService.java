@@ -3,19 +3,22 @@ package student.service;
 import static student.util.StudentUtils.nextLine;
 import static student.util.StudentUtils.nextLineToInteger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import student.exception.RangeException;
 import student.vo.Student;
 
 public class StudentService {
 
-	private int totalCnt = 20;
+//	private Student[] students = new Student[totalCnt];
+	private List<Student> students = new ArrayList<>();
 
-	private Student[] students = new Student[totalCnt];
-
+	// 인스턴스 초기화 블럭
 	{
-		this.students[0] = new Student(1, "홍길동", 90, 80, 70);
-		this.students[1] = new Student(2, "김길동", 90, 60, 60);
-		this.students[2] = new Student(3, "이길동", 95, 85, 75);
+		students.add(new Student(1, "홍길동", 90, 80, 70));
+		students.add(new Student(2, "김길동", 90, 60, 60));
+		students.add(new Student(3, "이길동", 95, 85, 75));
 	}
 
 	// 학생 등록
@@ -24,7 +27,7 @@ public class StudentService {
 		int no = nextLineToInteger("학번을 입력하세요 > ");
 
 		// 학번이 중복되는지 확인한다
-		if (isExist(no)) { // 중복되면 throw
+		if (duplicateNo(no)) { // 중복되면 throw
 			throw new RuntimeException("학번이 중복됩니다");
 		}
 
@@ -34,14 +37,7 @@ public class StudentService {
 		int eng = inputScore("영어");
 		int math = inputScore("수학");
 
-		// 중간이 비기 때문에 이런 식으로 하면 안 됨
-		// 일단 현재 중간이 비는 부분을 찾아야 함
-		int minBlankIndex = findBlankIndex();
-		if (minBlankIndex == -1) {
-			throw new RuntimeException("학생 배열에 빈 공간이 없습니다");
-		}
-
-		this.students[minBlankIndex] = new Student(no, name, kor, eng, math);
+		this.students.add(new Student(no, name, kor, eng, math));
 		this.list();
 	}
 
@@ -49,10 +45,8 @@ public class StudentService {
 	public void list() {
 		System.out.printf("학번\t이름\t국어\t영어\t수학\t총점\t평균\n");
 		System.out.println("=====================================================");
-		for (int i = 0; i < totalCnt; i++) {
-			if (students[i] != null) {
-				System.out.println(students[i]);
-			}
+		for(Student s : this.students) {
+			System.out.println(s);
 		}
 		System.out.println("=====================================================");
 	}
@@ -63,13 +57,11 @@ public class StudentService {
 
 		Student s = null;
 
-		// 삭제하면 array 특성상 중간이 비기에 totalCnt로 처리한다
-		for (int i = 0; i < totalCnt; i++) {
-			if (students[i] != null) { // 널포인터 방지
-				if (no == students[i].getNo()) {
-					s = students[i];
-					break;
-				}
+		// 수정할 학생이 존재하는지 확인
+		for(Student ss : this.students) {
+			if(no == ss.getNo()) {
+				s = ss;
+				break;
 			}
 		}
 
@@ -90,17 +82,14 @@ public class StudentService {
 	// 학생 삭제
 	public void remove() {
 		int no = nextLineToInteger("삭제할 학생의 학번을 입력해주세요");
-		int delNo = -1; // 삭제할 학생의 인덱스
 
 		Student s = null;
-
-		for (int i = 0; i < totalCnt; i++) {
-			if (students[i] != null) { // 널포인터 방지
-				if (no == students[i].getNo()) {
-					s = students[i];
-					delNo = i;
-					break;
-				}
+		
+		// 삭제할 학생이 존재하는지 확인
+		for(Student ss : this.students) {
+			if(no == ss.getNo()) {
+				s = ss;
+				break;
 			}
 		}
 
@@ -109,28 +98,29 @@ public class StudentService {
 		}
 
 		// 삭제하려는 학생이 있으면 null로 바꾼다
-		this.students[delNo] = null;
+		this.students.remove(s); // 인덱스 말고 그냥 객체로 찾아서 지울 거임
 
 		System.out.println("해당 학생을 삭제하였습니다");
 	}
 
 	// 학생 석차 정렬
 	public void ranking() {
-		// 버블 정렬 : 처음부터 끝까지 앞뒤로 비교하면서 작은 걸 뒤로 놓음. 그걸 n^2회 함)
+		List<Student> rankingStudents = new ArrayList<>(); // 일단 ArrayList 복사
 
-		// 주소가 다른 새로운 배열을 만들어서 거기에 복사 후 그걸로 정렬해야 함
-//		Student[] rankingStudents = Arrays.copyOf(students, totalCnt); // 그대로 복사
-		Student[] rankingStudents = students.clone(); // 이렇게 해도 됨
+		for(Student s : this.students) {
+			rankingStudents.add(s);
+		}
+		
 		int rank = 1;
 
-		for (int i = 0; i < rankingStudents.length; i++) {
-			Student leftStudent = rankingStudents[i];
+		for (int i = 0; i < rankingStudents.size(); i++) {
+			Student leftStudent = rankingStudents.get(i);
 			if (leftStudent == null) { // 널포인터 방지
 				continue;
 			}
 
-			for (int j = i + 1; j < rankingStudents.length; j++) {
-				Student rightStudent = rankingStudents[j];
+			for (int j = i + 1; j < rankingStudents.size(); j++) {
+				Student rightStudent = rankingStudents.get(j);
 				if (rightStudent == null) { // 널포인터 방지
 					continue;
 				}
@@ -139,69 +129,29 @@ public class StudentService {
 				int rightTotal = rightStudent.total();
 
 				if (leftTotal < rightTotal) { // 앞뒤 바꿈
-					Student temp = rankingStudents[i];
-					rankingStudents[i] = rankingStudents[j];
-					rankingStudents[j] = temp;
+					Student temp = rankingStudents.get(i);
+					rankingStudents.set(i, rankingStudents.get(j)); // i에 j 넣음
+					rankingStudents.set(j, temp); // j에 i 넣음
 				}
 			}
 		}
-
-		// 전체 학생 수를 셈 (석차용)
-		int studentCount = countStudent();
 
 		System.out.printf("학번\t이름\t국어\t영어\t수학\t총점\t평균\t석차\n");
 		System.out.println("===========================================================");
 		for (Student s : rankingStudents) {
 			if (s != null) {
-				System.out.println(s.toString(rank, studentCount));
+				System.out.println(s.toString(rank, students.size()));
 				rank++;
 			}
 		}
 		System.out.println("===========================================================");
 	}
 
-	// 등록하려는 학번이 이미 존재하는지 확인 (학번은 Primary값)
-	private boolean isExist(int no) {
-
-		for (int i = 0; i < totalCnt; i++) {
-			if (students[i] != null) { // 널포인터 방지
-				if (no == students[i].getNo()) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
 	// 점수가 0 ~ 100 사이인지 확인
 	private void isValidScore(int start, int end, int score) {
-		throw new RangeException(start, end);
-	}
-
-	// 학생 배열에서 빈 공간 중 가장 작은 값을 찾는다
-	private int findBlankIndex() {
-		for (int i = 0; i < totalCnt; i++) {
-			if (this.students[i] == null) {
-				return i;
-			}
+		if(score < start || score > end) {
+			throw new RangeException(start, end);
 		}
-
-		// 여기까지 없으면 -1을 출력한다
-		return -1;
-	}
-
-	// 학생 배열 중 학생이 존재하는 개수 (총 학생 수 세기)
-	private int countStudent() {
-		int cnt = 0;
-
-		for (int i = 0; i < totalCnt; i++) {
-			if (this.students[i] != null) {
-				cnt++;
-			}
-		}
-
-		return cnt;
 	}
 
 	// 등록, 수정에 공통적으로 들어가는 부분
@@ -226,11 +176,24 @@ public class StudentService {
 		return name;
 	}
 
+	// 점수를 입력함
 	private int inputScore(String subject) {
 		int score = nextLineToInteger(subject + " 점수를 입력하세요 > ");
 		isValidScore(0, 100, score);
 
 		return score;
+	}
+	
+	// 학번이 중복되는지 확인함
+	private boolean duplicateNo(int no) {
+
+		for(Student s : this.students) {
+			if(s.getNo() == no) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 }
