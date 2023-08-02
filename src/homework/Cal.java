@@ -61,7 +61,7 @@ public class Cal {
 		}
 		
 		System.out.println("\n=============================");
-		System.out.println("<-이전(p)    종료(x)    다음(n)->\n\n\n");
+		System.out.println("<-이전(p)  종료(x)  다음(n)->\n\n\n");
 	}
 }
 
