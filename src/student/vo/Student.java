@@ -22,12 +22,12 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return String.format("%3d\t%3s\t%3d\t%3d\t%3d\t%3d\t%3.2f", this.no, this.name, this.kor, this.eng, this.math,
+		return String.format("%4d\t%4s\t%4d\t%4d\t%4d\t%4d\t%4.2f", this.no, this.name, this.kor, this.eng, this.math,
 				this.total(), this.avg());
 	}
 
 	public String toString(int rank, int count) {
-		return String.format("%3d\t%3s\t%3d\t%3d\t%3d\t%3d\t%3.2f\t%d/%d", this.no, this.name, this.kor, this.eng,
+		return String.format("%4d\t%4s\t%4d\t%4d\t%4d\t%4d\t%4.2f\t%d/%d", this.no, this.name, this.kor, this.eng,
 				this.math, this.total(), this.avg(), rank, count);
 	}
 

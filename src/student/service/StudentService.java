@@ -43,7 +43,7 @@ public class StudentService {
 
 	// 목록 조회
 	public void list() {
-		System.out.printf("학번\t이름\t국어\t영어\t수학\t총점\t평균\n");
+		System.out.printf(" 학번\t이름\t국어\t영어\t수학\t총점\t평균\n");
 		System.out.println("=====================================================");
 		for(Student s : this.students) {
 			System.out.println(s);
@@ -105,44 +105,44 @@ public class StudentService {
 
 	// 학생 석차 정렬
 	public void ranking() {
-		List<Student> rankingStudents = new ArrayList<>(); // 일단 ArrayList 복사
-
-		for(Student s : this.students) {
-			rankingStudents.add(s);
-		}
+		// 이렇게 빈 거 넣고 일일이 할 필요 없이, 생성할 때 같은 List 컬렉션 객체를 넣고 복사할 수 있음.
+//		List<Student> rankingStudents = new ArrayList<>(); // 일단 ArrayList 복사
+//
+//		for(Student s : this.students) {
+//			rankingStudents.add(s);
+//		}
+		
+		List<Student> rankingStudents = new ArrayList<>(this.students);
 		
 		int rank = 1;
+		
+		// 람다식 쓰는 방법 - 람다식이라는 것과 익명함수 (Comparator 객체)에 대해 이해를 하자.
+		rankingStudents.sort((s1, s2) -> {
+			return Integer.compare(s2.total(), s1.total());
+		});
 
-		for (int i = 0; i < rankingStudents.size(); i++) {
-			Student leftStudent = rankingStudents.get(i);
-			if (leftStudent == null) { // 널포인터 방지
-				continue;
-			}
+//		for (int i = 0; i < rankingStudents.size(); i++) {
+//			Student leftStudent = rankingStudents.get(i);
+//			
+//			for (int j = i + 1; j < rankingStudents.size(); j++) {
+//				Student rightStudent = rankingStudents.get(j);
+//
+//				int leftTotal = leftStudent.total();
+//				int rightTotal = rightStudent.total();
+//
+//				if (leftTotal < rightTotal) { // 앞뒤 바꿈
+//					Student temp = rankingStudents.get(i);
+//					rankingStudents.set(i, rankingStudents.get(j)); // i에 j 넣음
+//					rankingStudents.set(j, temp); // j에 i 넣음
+//				}
+//			}
+//		}
 
-			for (int j = i + 1; j < rankingStudents.size(); j++) {
-				Student rightStudent = rankingStudents.get(j);
-				if (rightStudent == null) { // 널포인터 방지
-					continue;
-				}
-
-				int leftTotal = leftStudent.total();
-				int rightTotal = rightStudent.total();
-
-				if (leftTotal < rightTotal) { // 앞뒤 바꿈
-					Student temp = rankingStudents.get(i);
-					rankingStudents.set(i, rankingStudents.get(j)); // i에 j 넣음
-					rankingStudents.set(j, temp); // j에 i 넣음
-				}
-			}
-		}
-
-		System.out.printf("학번\t이름\t국어\t영어\t수학\t총점\t평균\t석차\n");
+		System.out.printf(" 학번\t이름\t국어\t영어\t수학\t총점\t평균\t석차\n");
 		System.out.println("===========================================================");
 		for (Student s : rankingStudents) {
-			if (s != null) {
-				System.out.println(s.toString(rank, students.size()));
-				rank++;
-			}
+			System.out.println(s.toString(rank, students.size()));
+			rank++;
 		}
 		System.out.println("===========================================================");
 	}
@@ -158,8 +158,8 @@ public class StudentService {
 	private String inputName() {
 		String name = nextLine("학생 이름을 입력하세요 > ");
 		int nameLen = name.length();
-		if (nameLen < 2 || nameLen > 4) {
-			throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
+		if (nameLen < 2 || nameLen > 3) {
+			throw new RuntimeException("이름은 2 ~ 3글자 완성형 한글로 입력해주세요");
 		}
 
 		// 또는 그냥 length 가지고 String.charAt() 써도 됨
@@ -169,7 +169,7 @@ public class StudentService {
 			int nameInt = (int) c;
 
 			if (nameInt < 44032 || nameInt > 55203) {
-				throw new RuntimeException("이름은 2 ~ 4글자 완성형 한글로 입력해주세요");
+				throw new RuntimeException("이름은 2 ~ 3글자 완성형 한글로 입력해주세요");
 			}
 		}
 
